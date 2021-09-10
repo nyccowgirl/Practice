@@ -3,8 +3,8 @@ public class Lipstick extends Cosmetics{
     private String color;
 
     public Lipstick(String brand, String name, String description, String type, String color, double msrp,
-                    double price) {
-        super(brand, name, description, msrp, price);
+                    double price, Inventory status) {
+        super(brand, name, description, msrp, price, status);
         this.type = type;
         this.color = color;
     }
@@ -27,7 +27,7 @@ public class Lipstick extends Cosmetics{
 
     @Override
     public String toString() {
-        return super.toString() + "\nType: " + type + "\nColor: " + color;
+        return super.toString() + "\tType: " + type + "\tColor: " + color;
     }
 
     @Override

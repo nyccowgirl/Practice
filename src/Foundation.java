@@ -1,8 +1,9 @@
 public class Foundation extends Cosmetics {
     private String finish;
 
-    public Foundation(String brand, String name, String description, String finish, double msrp, double price) {
-        super(brand, name, description, msrp, price);
+    public Foundation(String brand, String name, String description, String finish, double msrp, double price,
+                      Inventory status) {
+        super(brand, name, description, msrp, price, status);
         this.finish = finish;
     }
 
@@ -16,7 +17,7 @@ public class Foundation extends Cosmetics {
 
     @Override
     public String toString() {
-        return super.toString() + "\nFinish: " + finish;
+        return super.toString() + "\tFinish: " + finish;
     }
 
     @Override
