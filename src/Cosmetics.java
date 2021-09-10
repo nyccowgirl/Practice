@@ -1,3 +1,5 @@
+import java.lang.Math;
+
 public abstract class Cosmetics implements Comparable<Cosmetics> {
 
     public enum Inventory {
@@ -103,7 +105,7 @@ public abstract class Cosmetics implements Comparable<Cosmetics> {
             Cosmetics other = (Cosmetics) obj;
             return (sku == other.getSku() && brand.equalsIgnoreCase(other.getBrand()) &&
                     name.equalsIgnoreCase(other.getName()) && description.equalsIgnoreCase(other.getDescription()) &&
-                    ((msrp - other.getMsrp()) < .01) && ((price - other.getPrice()) < .01) &&
+                    (Math.abs(msrp - other.getMsrp()) < .01) && (Math.abs(price - other.getPrice()) < .01) &&
                     status.equals(other.getStatus()));
         } else {
             return false;
