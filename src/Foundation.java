@@ -18,4 +18,14 @@ public class Foundation extends Cosmetics {
     public String toString() {
         return super.toString() + "\nFinish: " + finish;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Foundation) {
+            Foundation other = (Foundation) obj;
+            return (super.equals(obj) && finish.equalsIgnoreCase(other.getFinish()));
+        } else {
+            return false;
+        }
+    }
 }

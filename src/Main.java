@@ -8,5 +8,7 @@ public class Main {
 
 	    System.out.println(skinFet);
 	    System.out.println(kissable);
+	    System.out.println(skinFet.equals(kissable));
+	    System.out.println(skinFet.equals(skinFet));
     }
 }

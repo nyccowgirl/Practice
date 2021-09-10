@@ -17,7 +17,7 @@ public class Lipstick extends Cosmetics{
         this.type = type;
     }
 
-    public String color() {
+    public String getColor() {
         return color;
     }
 
@@ -28,5 +28,16 @@ public class Lipstick extends Cosmetics{
     @Override
     public String toString() {
         return super.toString() + "\nType: " + type + "\nColor: " + color;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Lipstick) {
+            Lipstick other = (Lipstick) obj;
+            return (super.equals(obj) && type.equalsIgnoreCase(other.getType()) &&
+                    color.equalsIgnoreCase(other.getColor()));
+        } else {
+            return false;
+        }
     }
 }

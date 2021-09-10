@@ -1,4 +1,4 @@
-public class Cosmetics {
+public abstract class Cosmetics {
     private int sku;
     private String brand;
     private String name;
