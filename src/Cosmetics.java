@@ -87,6 +87,10 @@ public abstract class Cosmetics implements Comparable<Cosmetics> {
         this.status = status;
     }
 
+    public static int getTotalSkus() {
+        return Cosmetics.nextSKU - 1;
+    }
+
     @Override
     public String toString() {
         return "SKU: " + sku + "\tName: " + brand + " " + name + "\tDescription: " + description + "\tMSRP: " + msrp +
@@ -97,9 +101,10 @@ public abstract class Cosmetics implements Comparable<Cosmetics> {
     public boolean equals(Object obj) {
         if (obj instanceof Cosmetics) {
             Cosmetics other = (Cosmetics) obj;
-            return (brand.equalsIgnoreCase(other.getBrand()) && name.equalsIgnoreCase(other.getName()) &&
-                    description.equalsIgnoreCase(other.getDescription()) && ((msrp - other.getMsrp()) < .01) &&
-                    ((price - other.getPrice()) < .01) && status.equals(other.getStatus()));
+            return (sku == other.getSku() && brand.equalsIgnoreCase(other.getBrand()) &&
+                    name.equalsIgnoreCase(other.getName()) && description.equalsIgnoreCase(other.getDescription()) &&
+                    ((msrp - other.getMsrp()) < .01) && ((price - other.getPrice()) < .01) &&
+                    status.equals(other.getStatus()));
         } else {
             return false;
         }
@@ -112,9 +117,5 @@ public abstract class Cosmetics implements Comparable<Cosmetics> {
         } else {
             return Double.compare(msrp, obj.getMsrp());
         }
-    }
-
-    public static int totalSkus() {
-        return nextSKU - 1;
     }
 }
