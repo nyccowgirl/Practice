@@ -24,4 +24,9 @@ public class Lipstick extends Cosmetics{
     public void setColor(String color) {
         this.color = color;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nType: " + type + "\nColor: " + color;
+    }
 }

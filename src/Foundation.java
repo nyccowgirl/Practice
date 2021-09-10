@@ -13,4 +13,9 @@ public class Foundation extends Cosmetics {
     public void setFinish(String finish) {
         this.finish = finish;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nFinish: " + finish;
+    }
 }
