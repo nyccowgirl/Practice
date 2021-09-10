@@ -60,7 +60,7 @@ public abstract class Cosmetics {
 
     @Override
     public String toString() {
-        return "Name: " + brand + " " + name + "\nDescription: " + description + "\nMSRP: " + msrp +
+        return "SKU: " + sku + "\nName: " + brand + " " + name + "\nDescription: " + description + "\nMSRP: " + msrp +
                 "\nPrice: " + price;
     }
 
