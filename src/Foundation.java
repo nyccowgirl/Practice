@@ -4,8 +4,8 @@ public class Foundation extends Cosmetics {
     private String finish;
 
     public Foundation(String brand, String name, String description, String finish, BigDecimal msrp, BigDecimal price,
-                      Inventory status) {
-        super(brand, name, description, msrp, price, status);
+                      int quantity, Inventory status) {
+        super(brand, name, description, msrp, price, quantity, status);
         this.finish = finish;
     }
 

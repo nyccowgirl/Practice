@@ -5,8 +5,8 @@ public class Lipstick extends Cosmetics{
     private String color;
 
     public Lipstick(String brand, String name, String description, String type, String color, BigDecimal msrp,
-                    BigDecimal price, Inventory status) {
-        super(brand, name, description, msrp, price, status);
+                    BigDecimal price, int quantity, Inventory status) {
+        super(brand, name, description, msrp, price, quantity, status);
         this.type = type;
         this.color = color;
     }
