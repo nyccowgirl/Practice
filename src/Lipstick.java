@@ -1,9 +1,11 @@
+import java.math.BigDecimal;
+
 public class Lipstick extends Cosmetics{
     private String type;
     private String color;
 
-    public Lipstick(String brand, String name, String description, String type, String color, double msrp,
-                    double price, Inventory status) {
+    public Lipstick(String brand, String name, String description, String type, String color, BigDecimal msrp,
+                    BigDecimal price, Inventory status) {
         super(brand, name, description, msrp, price, status);
         this.type = type;
         this.color = color;

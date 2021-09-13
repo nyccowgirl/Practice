@@ -1,4 +1,7 @@
 import java.lang.Math;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 public abstract class Cosmetics implements Comparable<Cosmetics> {
 
@@ -20,13 +23,17 @@ public abstract class Cosmetics implements Comparable<Cosmetics> {
     private String brand;
     private String name;
     private String description;
-    private double msrp;
-    private double price;
+    private BigDecimal msrp;
+    private BigDecimal price;
     private Inventory status;
 
     private static int nextSKU = 1;
+    private final static int DECIMALS = 2;
+    private final static RoundingMode ROUNDING_MODE = RoundingMode.HALF_EVEN;
+    DecimalFormat df = new DecimalFormat("$#,##0.00");
 
-    public Cosmetics(String brand, String name, String description, double msrp, double price, Inventory status) {
+    public Cosmetics(String brand, String name, String description, BigDecimal msrp, BigDecimal price,
+                     Inventory status) {
         this.sku = nextSKU;
         nextSKU++;
         this.brand = brand;
@@ -65,19 +72,19 @@ public abstract class Cosmetics implements Comparable<Cosmetics> {
         this.description = description;
     }
 
-    public double getMsrp() {
+    public BigDecimal getMsrp() {
         return msrp;
     }
 
-    public void setMsrp(double msrp) {
+    public void setMsrp(BigDecimal msrp) {
         this.msrp = msrp;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -95,8 +102,10 @@ public abstract class Cosmetics implements Comparable<Cosmetics> {
 
     @Override
     public String toString() {
-        return "SKU: " + sku + "\tName: " + brand + " " + name + "\tDescription: " + description + "\tMSRP: " + msrp +
-                "\tPrice: " + price + "\tInventory: " + status.getAbbreviation();
+        return "SKU: " + sku + "\tName: " + brand + " " + name + "\tDescription: " + description +
+                "\tMSRP: " + df.format(msrp.setScale(DECIMALS, ROUNDING_MODE)) +
+                "\tPrice: " + df.format(price.setScale(DECIMALS, ROUNDING_MODE)) +
+                "\tInventory: " + status.getAbbreviation();
     }
 
     @Override
@@ -105,8 +114,7 @@ public abstract class Cosmetics implements Comparable<Cosmetics> {
             Cosmetics other = (Cosmetics) obj;
             return (sku == other.getSku() && brand.equalsIgnoreCase(other.getBrand()) &&
                     name.equalsIgnoreCase(other.getName()) && description.equalsIgnoreCase(other.getDescription()) &&
-                    (Math.abs(msrp - other.getMsrp()) < .01) && (Math.abs(price - other.getPrice()) < .01) &&
-                    status.equals(other.getStatus()));
+                    msrp.equals(other.getMsrp()) && price.equals(other.getPrice()) && status.equals(other.getStatus()));
         } else {
             return false;
         }
@@ -114,10 +122,10 @@ public abstract class Cosmetics implements Comparable<Cosmetics> {
 
     @Override
     public int compareTo(Cosmetics obj) {
-        if (Double.compare(price, obj.getPrice()) != 0) {
-            return Double.compare(price, obj.getPrice());
+        if (price.compareTo(obj.getPrice()) != 0) {
+            return price.compareTo(obj.getPrice());
         } else {
-            return Double.compare(msrp, obj.getMsrp());
+            return msrp.compareTo(obj.getMsrp());
         }
     }
 }

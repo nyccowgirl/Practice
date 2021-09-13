@@ -1,7 +1,9 @@
+import java.math.BigDecimal;
+
 public class Foundation extends Cosmetics {
     private String finish;
 
-    public Foundation(String brand, String name, String description, String finish, double msrp, double price,
+    public Foundation(String brand, String name, String description, String finish, BigDecimal msrp, BigDecimal price,
                       Inventory status) {
         super(brand, name, description, msrp, price, status);
         this.finish = finish;

@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -5,10 +6,11 @@ public class Main {
 
     public static void main(String[] args) {
 	    Foundation skinFet = new Foundation("Pat McGrath Labs", "Skin Fetish",
-                "medium coverage luminous glow", "luminous", 78, 68,
-				Cosmetics.Inventory.IN_STOCK);
+                "medium coverage luminous glow", "luminous", BigDecimal.valueOf(78),
+				BigDecimal.valueOf(68), Cosmetics.Inventory.IN_STOCK);
 	    Lipstick kissable = new Lipstick("Charlotte Tilbury", "K*I*S*S", "satin lipstick",
-                "satin", "Pillow Talk", 38, 35, Cosmetics.Inventory.OUT_OF_STOCK);
+                "satin", "Pillow Talk", BigDecimal.valueOf(38), BigDecimal.valueOf(35),
+				Cosmetics.Inventory.OUT_OF_STOCK);
 
 	    System.out.println(skinFet);
 	    System.out.println(kissable);
