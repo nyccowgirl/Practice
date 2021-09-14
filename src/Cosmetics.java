@@ -4,20 +4,6 @@ import java.text.DecimalFormat;
 
 public abstract class Cosmetics implements Comparable<Cosmetics> {
 
-    public enum Inventory {
-        IN_STOCK("AVAIL"), OUT_OF_STOCK("OUT"), DISCONTINUED("DISC");
-
-        private String abbreviation;
-
-        Inventory(String abbreviation) {
-            this.abbreviation = abbreviation;
-        }
-
-        public String getAbbreviation() {
-            return abbreviation;
-        }
-    }
-
     private int sku;
     private String brand;
     private String name;
