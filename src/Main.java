@@ -54,9 +54,11 @@ public class Main {
 			System.out.print("Enter the MSRP: ");
 			BigDecimal msrp = scan.nextBigDecimal();
 			scan.nextLine();
+			//BigDecimal msrp = new BigDecimal(Double.parseDouble(scan.nextLine());
 			System.out.print("Enter the price: ");
 			BigDecimal price = scan.nextBigDecimal();
 			scan.nextLine();
+			//BigDecimal price = new BigDecimal(Double.parseDouble(scan.nextLine());
 			System.out.print("Enter the quantity in inventory: ");
 			int quantity = Integer.parseInt(scan.nextLine());
 			System.out.print("Enter the inventory status (1 - in stock; 2 - out of stock; 3 - discontinued): ");
