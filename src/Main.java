@@ -15,9 +15,15 @@ public class Main {
 				.quantity(25)
 				.status(Inventory.IN_STOCK)
 				.build();
-	    Lipstick kissable = new Lipstick("Charlotte Tilbury", "K*I*S*S", "satin lipstick",
-                "satin", "Pillow Talk", BigDecimal.valueOf(38), BigDecimal.valueOf(35), 77,
-				Inventory.IN_STOCK);
+	    Lipstick kissable = new Lipstick.Builder("Charlotte Tilbury", "K*I*S*S")
+				.type("satin")
+				.color("Pillow Talk Intense")
+				.description("satin lipstick")
+				.msrp(BigDecimal.valueOf(38))
+				.price(BigDecimal.valueOf(35))
+				.quantity(77)
+				.status(Inventory.IN_STOCK)
+				.build();
 
 	    System.out.println(skinFet);
 	    System.out.println(kissable);

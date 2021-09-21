@@ -4,83 +4,89 @@ import java.text.DecimalFormat;
 
 public class Cosmetics implements Comparable<Cosmetics> {
 
-    private int sku;
-    private String brand;
-    private String name;
-    private String description;
-    private BigDecimal msrp;
-    private BigDecimal price;
-    private int quantity;
-    private Inventory status;
+    protected int sku;
+    protected String brand;
+    protected String name;
+    protected String description;
+    protected BigDecimal msrp;
+    protected BigDecimal price;
+    protected int quantity;
+    protected Inventory status = Inventory.IN_STOCK;
 
     private static int nextSKU = 1;
     private static int totalInventory = 0;
     private final static int DECIMALS = 2;
     private final static RoundingMode ROUNDING_MODE = RoundingMode.HALF_EVEN;
-    DecimalFormat df = new DecimalFormat("$#,##0.00");
+    protected static DecimalFormat df = new DecimalFormat("$#,##0.00");
 
-    protected Cosmetics(Builder builder) {
-        this.sku = builder.sku;
-        this.brand = builder.brand;
-        this.name = builder.name;
-        this.description = builder.description;
-        this.msrp = builder.msrp;
-        this.price = builder.price;
-        this.quantity = builder.quantity;
+    protected Cosmetics(Builder<?, ?> builder) {
+        this.sku = builder.account.sku;
+        this.brand = builder.account.brand;
+        this.name = builder.account.name;
+        this.description = builder.account.description;
+        this.msrp = builder.account.msrp;
+        this.price = builder.account.price;
+        this.quantity = builder.account.quantity;
         totalInventory += quantity;
     }
 
-    // BUILDER
-    public static class Builder {
+    protected Cosmetics() {}
 
-        private int sku, quantity;
-        private String brand, name, description;
-        private BigDecimal msrp, price;
-        private Inventory status;
+    // BUILDER
+    protected abstract static class Builder<T extends Cosmetics, B extends Builder<T, B>> {
+
+        protected T account;
+        protected B builder;
 
         public Builder(String brand, String name) {
-            this.sku = nextSKU;
+            builder = getBuilder();
+            account = createCosmetics();
+            account.sku = nextSKU;
             nextSKU++;
-            this.brand = brand;
-            this.name = name;
+            account.brand = brand;
+            account.name = name;
         }
 
-        public Builder description(String description) {
-            this.description = description;
-            return this;
+        public B description(String description) {
+            account.description = description;
+            return builder;
         }
 
-        public Builder msrp(BigDecimal msrp) {
-            this.msrp = msrp;
-            return this;
+        public B msrp(BigDecimal msrp) {
+            account.msrp = msrp;
+            return builder;
         }
 
-        public Builder price(BigDecimal price) {
-            this.price = price;
-            return this;
+        public B price(BigDecimal price) {
+            account.price = price;
+            return builder;
         }
 
-        public Builder quantity(int quantity) {
+        public B quantity(int quantity) {
             if (quantity < 0) {
                 System.out.println("Quantity cannot be negative.");
             } else {
-                this.quantity = quantity;
+                account.quantity = quantity;
             }
-            return this;
+            return builder;
         }
 
-        public Builder status(Inventory status) {
-            if (quantity != 0) {
-                this.status = Inventory.IN_STOCK;
+        public B status(Inventory status) {
+            if (account.quantity != 0) {
+                account.status = Inventory.IN_STOCK;
             } else if (status != Inventory.IN_STOCK){
-                this.status = status;
+                account.status = status;
             }
-            return this;
+            return builder;
         }
 
-        public Cosmetics build() {
-            return new Cosmetics(this);
+        public T build() {
+            return createCosmetics(builder);
         }
+
+        protected abstract T createCosmetics(Builder<T, B> builder);
+        protected abstract T createCosmetics();
+        protected abstract B getBuilder();
     }
 
     public int getSku() {

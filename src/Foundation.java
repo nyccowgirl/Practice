@@ -1,26 +1,34 @@
-import java.math.BigDecimal;
-
 public class Foundation extends Cosmetics {
     private String finish;
 
-    public Foundation(Builder builder) {
-        super(builder);
+    private Foundation(Cosmetics.Builder<?, ?> cosmeticsBuilder, Builder foundationBuilder) {
+        super(cosmeticsBuilder);
+        this.finish = foundationBuilder.account.finish;
     }
 
-    public static class Builder extends Cosmetics.Builder {
-        private String finish;
+    private Foundation() {}
+
+    public static class Builder extends Cosmetics.Builder<Foundation, Foundation.Builder> {
 
         public Builder(String brand, String name) {
             super(brand, name);
         }
 
         public Builder finish(String finish) {
-            this.finish = finish;
-            return this;
+            account.finish = finish;
+            return builder;
         }
 
-        public Foundation build() {
-            return new Foundation(this);
+        protected Foundation createCosmetics(Cosmetics.Builder<Foundation, Builder> builder) {
+            return new Foundation(builder, this);
+        }
+
+        protected Foundation createCosmetics() {
+            return new Foundation();
+        }
+
+        protected Builder getBuilder() {
+            return this;
         }
     }
 

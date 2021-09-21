@@ -8,9 +8,23 @@ public class CosmeticsFactory {
         Cosmetics c;
 
         if (category.equals(Category.FOUNDATION)) {
-            c = new Foundation(brand, name, description, finish, msrp, price, quantity, status);
+            c = new Foundation.Builder(brand, name)
+                    .description(description)
+                    .finish(finish)
+                    .msrp(msrp)
+                    .price(price)
+                    .quantity(quantity)
+                    .status(status)
+                    .build();
         } else if (category.equals(Category.LIPSTICK)) {
-            c = new Lipstick(brand, name, description, finish, msrp, price, quantity, status);
+            c = new Lipstick.Builder(brand, name)
+                    .description(description)
+                    .type(finish)
+                    .msrp(msrp)
+                    .price(price)
+                    .quantity(quantity)
+                    .status(status)
+                    .build();
         } else {
             throw new IllegalArgumentException("Not a valid type of cosmetics.");
         }
