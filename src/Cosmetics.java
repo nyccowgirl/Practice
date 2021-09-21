@@ -2,7 +2,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
-public abstract class Cosmetics implements Comparable<Cosmetics> {
+public class Cosmetics implements Comparable<Cosmetics> {
 
     private int sku;
     private String brand;
@@ -19,25 +19,67 @@ public abstract class Cosmetics implements Comparable<Cosmetics> {
     private final static RoundingMode ROUNDING_MODE = RoundingMode.HALF_EVEN;
     DecimalFormat df = new DecimalFormat("$#,##0.00");
 
-    public Cosmetics(String brand, String name, String description, BigDecimal msrp, BigDecimal price, int quantity,
-                     Inventory status) {
-        if (quantity == 0) {
-            System.out.println("Quantity cannot be negative.");
-        } else {
+    protected Cosmetics(Builder builder) {
+        this.sku = builder.sku;
+        this.brand = builder.brand;
+        this.name = builder.name;
+        this.description = builder.description;
+        this.msrp = builder.msrp;
+        this.price = builder.price;
+        this.quantity = builder.quantity;
+        totalInventory += quantity;
+    }
+
+    // BUILDER
+    public static class Builder {
+
+        private int sku, quantity;
+        private String brand, name, description;
+        private BigDecimal msrp, price;
+        private Inventory status;
+
+        public Builder(String brand, String name) {
             this.sku = nextSKU;
             nextSKU++;
             this.brand = brand;
             this.name = name;
+        }
+
+        public Builder description(String description) {
             this.description = description;
+            return this;
+        }
+
+        public Builder msrp(BigDecimal msrp) {
             this.msrp = msrp;
+            return this;
+        }
+
+        public Builder price(BigDecimal price) {
             this.price = price;
-            this.quantity = quantity;
-            totalInventory += quantity;
+            return this;
+        }
+
+        public Builder quantity(int quantity) {
+            if (quantity < 0) {
+                System.out.println("Quantity cannot be negative.");
+            } else {
+                this.quantity = quantity;
+            }
+            return this;
+        }
+
+        public Builder status(Inventory status) {
             if (quantity != 0) {
                 this.status = Inventory.IN_STOCK;
             } else if (status != Inventory.IN_STOCK){
                 this.status = status;
             }
+            return this;
+        }
+
+        public Cosmetics build() {
+            return new Cosmetics(this);
         }
     }
 

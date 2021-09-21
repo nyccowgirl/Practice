@@ -3,10 +3,25 @@ import java.math.BigDecimal;
 public class Foundation extends Cosmetics {
     private String finish;
 
-    public Foundation(String brand, String name, String description, String finish, BigDecimal msrp, BigDecimal price,
-                      int quantity, Inventory status) {
-        super(brand, name, description, msrp, price, quantity, status);
-        this.finish = finish;
+    public Foundation(Builder builder) {
+        super(builder);
+    }
+
+    public static class Builder extends Cosmetics.Builder {
+        private String finish;
+
+        public Builder(String brand, String name) {
+            super(brand, name);
+        }
+
+        public Builder finish(String finish) {
+            this.finish = finish;
+            return this;
+        }
+
+        public Foundation build() {
+            return new Foundation(this);
+        }
     }
 
     public String getFinish() {

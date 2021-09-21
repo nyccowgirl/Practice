@@ -7,9 +7,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-	    Foundation skinFet = new Foundation("Pat McGrath Labs", "Skin Fetish",
-                "medium coverage luminous glow", "luminous", BigDecimal.valueOf(78),
-				BigDecimal.valueOf(68), 25, Inventory.IN_STOCK);
+	    Foundation skinFet = new Foundation.Builder("Pat McGrath Labs", "Skin Fetish")
+				.description("medium coverage luminous glow")
+				.finish("luminous")
+				.msrp(BigDecimal.valueOf(78))
+				.price(BigDecimal.valueOf(68))
+				.quantity(25)
+				.status(Inventory.IN_STOCK)
+				.build();
 	    Lipstick kissable = new Lipstick("Charlotte Tilbury", "K*I*S*S", "satin lipstick",
                 "satin", "Pillow Talk", BigDecimal.valueOf(38), BigDecimal.valueOf(35), 77,
 				Inventory.IN_STOCK);

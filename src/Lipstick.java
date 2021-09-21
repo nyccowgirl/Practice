@@ -18,6 +18,16 @@ public class Lipstick extends Cosmetics{
         this(brand, name, description, type, DEFAULT_COLOR, msrp, price, quantity, status);
     }
 
+    public static class Builder extends Cosmetics.Builder {
+        private String type;
+        private String color = DEFAULT_COLOR;
+
+        public Builder(String brand, String name) {
+            super(brand, name);
+
+        }
+    }
+
     public String getType() {
         return type;
     }
